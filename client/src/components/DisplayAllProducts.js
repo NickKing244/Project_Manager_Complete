@@ -28,7 +28,12 @@ const DisplayAllProducts = (props) => {
       {products.length > 0
         ? products.map((product, index) => (
             <div key={index}>
-              <Link to={`/${product._id}/edit`}>Edit</Link>
+              <h3>
+                <Link to={`/${product._id}/edit`}>Edit</Link>
+              </h3>
+              <h3>
+                <Link to={`/${product._id}`}>Display Product Info</Link>
+              </h3>
               <p>{product.title}</p>
               <p>{product.price}</p>
               <p>{product.description}</p>

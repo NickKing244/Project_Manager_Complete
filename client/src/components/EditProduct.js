@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../App.css";
+import { navigate } from "@reach/router";
 
 const EditProduct = (props) => {
   const { productId } = props;
@@ -18,10 +19,21 @@ const EditProduct = (props) => {
       })
       .catch((err) => console.log(err));
   }, []);
+  const handleUpdateSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .put(`http://localhost:8000/api/product/${productId}`, {
+        title,
+        price,
+        description,
+      })
+      .then((updatedProduct) => navigate("/"))
+      .catch((err) => console.log(err));
+  };
   return (
     <div>
       <h1>Edit Product</h1>
-      <form>
+      <form onSubmit={handleUpdateSubmit}>
         Title:
         <input
           type="text"
@@ -43,6 +55,8 @@ const EditProduct = (props) => {
           onChange={(e) => setDescription(e.target.value)}
           value={description}
         />
+        <br />
+        <input type="submit" value="UPDATE" />
       </form>
     </div>
   );
